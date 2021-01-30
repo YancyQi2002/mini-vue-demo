@@ -3,6 +3,7 @@
 // const { effect, reactive } = require('@vue/reactivity')
 // const { effectWatch, reactive } = require('./core/reactivity')
 import { effectWatch, reactive } from './core/reactivity/index.js'
+import { h } from './core/h.js'
 
 // v1
 // let a = 10
@@ -49,16 +50,29 @@ export default {
     // template → render
     render(context) {
         // 构建 view = b
-
         // view → 每次都需要重新创建
         // 要计算出最小的更新点 → vdom
         // js → diff
-
         // reset
-        const div = document.createElement("div")
-        div.innerText = context.state.count
+        // tag
+        // props
+        // children
+        // const div = document.createElement("div")
+        // div.innerText = context.state.count
+        // return div
 
-        return div
+        return h(
+            "div",
+            {
+                id: "app - " + context.state.count,
+                class: "showTime",
+            },
+            // String(context.state.count)
+            [
+                h("p", null, String(context.state.count)),
+                h("p", null, "hahaha"),
+            ]
+        )
     },
     setup() {
         // a = 响应式数据
